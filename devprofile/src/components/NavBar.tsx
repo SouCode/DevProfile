@@ -3,12 +3,12 @@ import Link from 'next/link';
 
 const NavBar: React.FC = () => {
   return (
-    <div className="flex justify-between items-center bg-white p-4" style={{ width: '1153px', height: '100px' }}>
+    <div className="flex justify-between items-center w-full bg-white p-4">
       <img src="/SouCodeLogo.svg" alt="SouCode Logo" />
-      <div className="space-x-4">
-        <Link href="#About" className="text-gray-700 hover:text-black">#About</Link>
-        <Link href="#Work" className="text-gray-700 hover:text-black">#Work</Link>
-        <Link href="#Contact" className="text-gray-700 hover:text-black">#Contact</Link>
+      <div className="space-x-4" style={{ width: '827px', justifyContent: 'flex-end', display: 'flex' }}>
+        <Link href="#About" className="text-gray-700 hover:text-black">About</Link>
+        <Link href="#Work" className="text-gray-700 hover:text-black">Work</Link>
+        <Link href="#Contact" className="text-gray-700 hover:text-black">Contact</Link>
       </div>
     </div>
   );
