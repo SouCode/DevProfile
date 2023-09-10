@@ -18,6 +18,9 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ offsetTop = '0px', offsetLeft =
       <p className="mt-4" style={{ width: '437.48px', height: '99.84px' }}>
         I enjoy coding as it lets me channel my creativity, while also presenting a challenge of crafting something both inspiring and valuable for others.
       </p>
+      <div className="mt-10"> {/* Gap of 10px as you mentioned */}
+        <img src="/HeaderAnchor.svg" alt="Anchor Button" style={{ width: '61px', height: '61px' }} />
+      </div>
     </div>
   );
 }
