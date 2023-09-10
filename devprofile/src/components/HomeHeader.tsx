@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 interface HomeHeaderProps {
   offsetTop?: string;    // Adjusts the vertical position
@@ -7,6 +8,12 @@ interface HomeHeaderProps {
 }
 
 const HomeHeader: React.FC<HomeHeaderProps> = ({ offsetTop = '0px', offsetLeft = '0px', offsetRight }) => {
+  const router = useRouter();
+
+  const scrollToSection = (section: string) => {
+    void router.push(section);
+  };
+
   const leftStyle = offsetRight ? {} : { left: `calc(16px + ${offsetLeft})` };
   const rightStyle = offsetRight ? { right: offsetRight } : {};
 
@@ -19,7 +26,12 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ offsetTop = '0px', offsetLeft =
         I enjoy coding as it lets me channel my creativity, while also presenting a challenge of crafting something both inspiring and valuable for others.
       </p>
       <div className="mt-10">
-        <img src="/HeaderAnchor.svg" alt="Anchor Button" style={{ width: '61px', height: '61px' }} />
+        <button 
+          onClick={() => scrollToSection("#about")}
+          style={{ background: 'none', border: 'none', padding: '0', cursor: 'pointer' }}
+        >
+          <img src="/HeaderAnchor.svg" alt="Anchor Button" style={{ width: '61px', height: '61px' }} />
+        </button>
       </div>
     </div>
   );
