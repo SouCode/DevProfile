@@ -1,8 +1,17 @@
 import React from 'react';
 
-const HomeHeader: React.FC = () => {
+interface HomeHeaderProps {
+  offsetTop?: string;    // Adjusts the vertical position
+  offsetLeft?: string;   // Adjusts the left position
+  offsetRight?: string;  // Adjusts the right position (if you want to position from the right side)
+}
+
+const HomeHeader: React.FC<HomeHeaderProps> = ({ offsetTop = '0px', offsetLeft = '0px', offsetRight }) => {
+  const leftStyle = offsetRight ? {} : { left: `calc(16px + ${offsetLeft})` };
+  const rightStyle = offsetRight ? { right: offsetRight } : {};
+
   return (
-    <div className="absolute top-20 left-16"> {/* Adjusted for the top and left values you provided */}
+    <div className="absolute" style={{ top: `calc(20px + ${offsetTop})`, ...leftStyle, ...rightStyle }}>
       <h1 className="text-4xl font-bold" style={{ width: '507.4px', height: '83.86px' }}>
         Welcome to my Portfolio. I am a full-Stack developer.
       </h1>

@@ -10,7 +10,7 @@ const Home: React.FC = () => {
     <div>
       <NavBar />
       <HomeBackground />
-      <HomeHeader />
+      <HomeHeader offsetTop="200px" offsetRight="800px" />
 
     </div>
   );
