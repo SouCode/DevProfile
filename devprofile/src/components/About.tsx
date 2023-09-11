@@ -4,7 +4,7 @@ const About: React.FC = () => {
     return (
         <div className="h-screen bg-white relative">
             <div
-                className="absolute top-5 left-13 w-[538.5px] h-[304.11px] flex items-center justify-center"
+                className="absolute top-2 left-13 w-[538.5px] h-[304.11px] flex items-center justify-center"
             >
                 <img src="/SouPicFrame.svg" alt="Sou Pic Frame" className="w-[90%] h-[90%]" />
             </div>
@@ -12,7 +12,7 @@ const About: React.FC = () => {
             <div
                 className="border-black absolute flex items-center justify-center p-4"
                 style={{
-                    top: '35px',
+                    top: '25px',
                     left: '560.5px',
                     width: '846px',
                     height: '273px',
@@ -29,7 +29,7 @@ const About: React.FC = () => {
             <div
                 className="absolute flex items-center justify-center p-1 rounded-lg"  // Reduced padding to p-1
                 style={{
-                    top: '345px',
+                    top: '320px',
                     left: '13px',  // Set to 13px
                     width: '1226px',
                     height: '266px',
@@ -39,6 +39,20 @@ const About: React.FC = () => {
 
                 {/*Figure out how to add Github activity */}
             </div>
+
+            {/* Certifications box */}
+            <div
+                className="absolute flex items-center justify-center p-1 rounded-lg"  // Minimal padding
+                style={{
+                    top: '600px',
+                    left: '13px',  // Position from Figma
+                    width: '849.17px',
+                    height: '167.47px',
+                }}
+            >
+                <img src="/Certification.svg" alt="Certifications" className="w-full h-full" />
+            </div>
+
 
 
         </div>
