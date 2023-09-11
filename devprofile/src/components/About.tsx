@@ -25,6 +25,22 @@ const About: React.FC = () => {
                 <p>Your paragraph content here...</p>
             </div>
 
+            {/* Tools/Activity box */}
+            <div
+                className="absolute flex items-center justify-center p-1 rounded-lg"  // Reduced padding to p-1
+                style={{
+                    top: '345px',
+                    left: '13px',  // Set to 13px
+                    width: '1226px',
+                    height: '266px',
+                }}
+            >
+                <img src="/tools.svg" alt="Tools" className="w-full h-full rounded-lg" />
+
+                {/*Figure out how to add Github activity */}
+            </div>
+
+
         </div>
     );
 }
