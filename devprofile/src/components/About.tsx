@@ -14,7 +14,7 @@ const About: React.FC = () => {
                 style={{
                     top: '25px',
                     left: '560.5px',
-                    width: '846px',
+                    width: '800px',
                     height: '273px',
                     borderTopWidth: '4px',
                     borderLeftWidth: '4px',
@@ -51,6 +51,19 @@ const About: React.FC = () => {
                 }}
             >
                 <img src="/Certification.svg" alt="Certifications" className="w-full h-full" />
+            </div>
+
+            {/* ToBeContinued box */}
+            <div
+                className="absolute flex items-center justify-center p-1 rounded-lg"  // Minimal padding
+                style={{
+                    top: '595px',
+                    left: '810px',  // Position from Figma
+                    width: '454.7px',
+                    height: '167.74px',
+                }}
+            >
+                <img src="/ToBeContinued.svg" alt="To Be Continued" className="w-full h-full" />
             </div>
 
 
