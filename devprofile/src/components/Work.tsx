@@ -11,10 +11,11 @@ const Work: React.FC = () => {
     }, []);
 
     return (
-        <div className="h-screen bg-white relative flex flex-col items-center pt-10" id="work">
+        <div className="h-screen bg-custom-gray relative flex flex-col items-center pt-10" id="work">
+            
             {/* Latest Projects */}
             <div
-                className="border-black flex items-center justify-center p-4 mb-6"  // Added margin-bottom for spacing
+                className="border-black bg-white flex items-center justify-center p-4 mb-6"  // Added margin-bottom for spacing
                 style={{
                     width: '607px',
                     height: '150px',

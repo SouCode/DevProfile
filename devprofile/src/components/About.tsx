@@ -15,7 +15,7 @@ const About: React.FC = () => {
   };
 
   return (
-    <div className="h-screen bg-white relative">
+    <div className="h-screen bg-custom-gray relative">
       {/* SouPicFrame */}
       <div
         className="absolute top-2 left-13 w-[538.5px] h-[304.11px] flex items-center justify-center"
@@ -25,11 +25,11 @@ const About: React.FC = () => {
 
       {/* About Me Box */}
       <div
-        className="border-black absolute flex items-center justify-center p-4"
+        className="border-black  bg-white absolute flex items-center justify-center p-4"
         style={{
           top: '25px',
-          left: '560.5px',
-          width: '800px',
+          left: '545.5px',
+          width: '820px',
           height: '273px',
           borderTopWidth: '4px',
           borderLeftWidth: '4px',
