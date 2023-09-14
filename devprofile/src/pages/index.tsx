@@ -3,7 +3,7 @@ import HomeHeader from '~/components/HomeHeader';
 import NavBar from '~/components/NavBar';
 import About from '../components/About';
 import Work from '~/components/Work';
-
+import Contact from '~/components/contact';
 // ... other imports
 
 const Home: React.FC = () => {
@@ -16,6 +16,7 @@ const Home: React.FC = () => {
         <About />
       </div>
       <Work />
+      <Contact />
       {/* ... other sections */}
     </div>
   );
