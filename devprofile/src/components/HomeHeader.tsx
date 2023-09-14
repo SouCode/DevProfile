@@ -18,7 +18,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ offsetTop = '0px', offsetLeft =
   const rightStyle = offsetRight ? { right: offsetRight } : {};
 
   return (
-    <div className="absolute " style={{ top: `calc(20px + ${offsetTop})`, ...leftStyle, ...rightStyle }}>
+    <div className="absolute text-white" style={{ top: `calc(20px + ${offsetTop})`, ...leftStyle, ...rightStyle }}>
       <h1 className="text-4xl font-bold" style={{ width: '507.4px', height: '83.86px' }}>
         Welcome to my Portfolio. I am a full-Stack developer.
       </h1>

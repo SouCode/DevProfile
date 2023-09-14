@@ -15,8 +15,7 @@ const About: React.FC = () => {
   };
 
   return (
-    <div className="h-screen bg-custom-gray relative">
-      {/* SouPicFrame */}
+    <div className="h-screen bg-white relative border-r-8 border-black">
       <div
         className="absolute top-2 left-13 w-[538.5px] h-[304.11px] flex items-center justify-center"
       >
@@ -82,6 +81,8 @@ const About: React.FC = () => {
       >
         <img src="/ToBeContinued.svg" alt="To Be Continued" className="w-full h-full" />
       </div>
+
+
     </div>
   );
 }

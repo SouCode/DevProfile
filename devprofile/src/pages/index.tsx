@@ -8,17 +8,22 @@ import Contact from '~/components/contact';
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <>
+    <div className="p-0 m-0">
       <NavBar />
       <HomeBackground />
       <HomeHeader offsetTop="200px" offsetRight="800px" />
-      <div id="about">
-        <About />
-      </div>
-      <Work />
-      <Contact />
-      {/* ... other sections */}
     </div>
+    <div id="about">
+      <About />
+    </div>
+    <div>
+      <Work />
+    </div>
+    <div>
+      <Contact />
+    </div>
+    </>
   );
 }
 

@@ -11,7 +11,7 @@ const Work: React.FC = () => {
     }, []);
 
     return (
-        <div className="h-screen bg-custom-gray relative flex flex-col items-center pt-10" id="work">
+        <div className="h-screen bg-black relative flex flex-col items-center pt-10" id="work">
             
             {/* Latest Projects */}
             <div

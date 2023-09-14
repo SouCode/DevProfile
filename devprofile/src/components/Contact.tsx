@@ -2,17 +2,16 @@ import React from 'react';
 
 const Contact: React.FC = () => {
     return (
-        <div className="h-screen bg-6A787E relative flex flex-col items-center pt-10" id="contact">
-            <h1 className="text-center text-4xl mt-10">Contact Me</h1>
-            
+        <div className="h-screen bg-white relative border-r-8 border-black">
             {/* ContactForm SVG */}
             <div
-                className="flex items-center justify-center"
+                className="absolute flex items-center justify-center"
                 style={{
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
                     width: '737.72px',
                     height: '485.67px',
-                    marginTop: '153.96px',
-                    marginLeft: '17.52px',
                 }}
             >
                 <img src="/ContactForm.svg" alt="Contact Form" className="w-full h-full" />
