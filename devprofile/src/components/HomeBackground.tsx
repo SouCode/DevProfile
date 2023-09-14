@@ -6,7 +6,7 @@ const HomeBackground: React.FC = () => {
       <img 
         src="/SouBackground.svg" 
         alt="Background Image" 
-        className="transform scale-70 object-contain"
+        className="transform md:scale-70 object-contain w-full md:w-auto"
       />
     </div>
   );
