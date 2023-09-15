@@ -18,9 +18,22 @@ const About: React.FC = () => {
         <img src="/SouPicFrame.svg" alt="Sou Pic Frame" className="w-[100%] h-[100%]" />
       </div>
 
-      <div className="border-black bg-white absolute flex items-center justify-center p-4 top-6 left-400 transform -translate-x-50%" style={{ width: '60%', height: '35%', borderTopWidth: '8px', borderLeftWidth: '8px', borderBottomWidth: '8px', borderRightWidth: '8px' }}>
-        <p>Your paragraph content here...</p>
-      </div>
+      <div 
+    className=" bg-white absolute flex items-center justify-center p-4"
+    style={{
+        width: '60vw',
+        height: '34vh',
+        top: '3vh',
+        left: '68%',
+        transform: 'translateX(-50%)',
+        borderWidth: '6px',
+        borderColor: 'black',
+        borderStyle: 'solid'
+    }}
+>
+    <p>Your paragraph content here...</p>
+</div>
+
 
       <div className="absolute flex items-center justify-center p-1 rounded-lg" style={{ top: '40vh', left: '3%', width: '90%', height: '40%' }}>
         <img src="/tools.svg" alt="Tools" className="w-half h-full rounded-lg" />
