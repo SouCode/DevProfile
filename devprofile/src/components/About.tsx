@@ -44,9 +44,22 @@ const About: React.FC = () => {
         <img src="/Certification.svg" alt="Certifications" className="w-full h-full" />
       </div>
 
-      <div className="absolute flex items-center justify-center p-1 rounded-lg cursor-pointer" style={{ top: '79vh', left: '59vw', width: '45vw', height: '16vh' }} onClick={() => { scrollToSection("#work"); void router.push("/#work"); }}>
-        <img src="/ToBeContinued.svg" alt="To Be Continued" className="w-full h-full" />
-      </div>
+      <div 
+    className="absolute flex items-center justify-center p-1 rounded-lg cursor-pointer" 
+    style={{ 
+        top: '79vh', 
+        left: '59vw', 
+        width: '45vw', 
+        height: '16vh' 
+    }} 
+    onClick={() => { 
+        scrollToSection("#work"); 
+        void router.push("/#work"); 
+    }}
+>
+    <img src="/ToBeContinued.svg" alt="To Be Continued" className="w-full h-full" />
+</div>
+
 
 
     </div>

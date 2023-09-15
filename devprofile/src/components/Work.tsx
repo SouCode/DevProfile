@@ -11,7 +11,7 @@ const Work: React.FC = () => {
     }, []);
 
     return (
-        <div className="h-screen bg-black relative flex flex-col items-center pt-5">
+        <div className="h-screen bg-black relative flex flex-col items-center pt-5 overflow-x-hidden"> {/* Added overflow-x-hidden here */}
 
             {/* Latest Projects */}
             <div
@@ -28,8 +28,6 @@ const Work: React.FC = () => {
                 <p>Latest Projects</p>
             </div>
 
-
-
             {/* Showcase SVG */}
             <div
                 className="relative flex items-center justify-center w-full mb-6"
@@ -44,7 +42,13 @@ const Work: React.FC = () => {
                 <div
                     ref={scrollContainerRef}
                     className="absolute z-20 flex overflow-x-auto"
-                    style={{ width: '940px', height: '250px', top: '80%', left: '50%', transform: 'translate(-50%, -50%)' }}
+                    style={{ 
+                        width: '940px', 
+                        height: '250px', 
+                        top: '80%', 
+                        left: '50%', 
+                        transform: 'translate(-50%, -50%)' 
+                    }}
                 >
                     {Array(6).fill(null).map((_, index) => (
                         <div key={index} className="flex-none bg-white mr-4 shadow-md rounded" style={{ width: '220px', height: '180px' }}>

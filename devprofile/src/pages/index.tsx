@@ -9,7 +9,7 @@ import Contact from '~/components/contact';
 const Home: React.FC = () => {
   return (
     <>
-    <div className="p-0 m-0">
+    <div>
       <NavBar />
       <HomeBackground />
       <HomeHeader offsetTop="200px" offsetRight="800px" />
