@@ -19,24 +19,36 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ offsetTop = '0px', offsetLeft =
 
   return (
     <div className="absolute text-white" style={{ top: `calc(20px + ${offsetTop})`, ...leftStyle, ...rightStyle }}>
-      <h1 className="text-4xl font-bold" style={{ width: '507.4px', height: '83.86px' }}>
+      <h1 className="text-4xl font-bold ml-[-2%]" style={{ width: '507.4px', height: '83.86px' }}>
         Welcome to my Portfolio. I am a full-Stack developer.
       </h1>
-      <p className="mt-4" style={{ width: '437.48px', height: '99.84px' }}>
+      <p className="mt-4 ml-[-1%]" style={{ width: '437.48px', height: '99.84px' }}>
         I enjoy coding as it lets me channel my creativity, while also presenting a challenge of crafting something both inspiring and valuable for others.
       </p>
+
       {/* SocialBox SVG */}
       <div
-        className="absolute"
+        className="absolute flex justify-center items-center"
         style={{
-          top: '145.5%',  // Adjust for vertical positioning
-          left: '33%', // Adjust for horizontal positioning
+          top: '145.5%',
+          left: '33%',
           transform: 'translate(-50%, -50%)',
-          width: '25vw',  // Responsive width based on viewport
-          height: '35vh', // Responsive height based on viewport
+          width: '25vw',
+          height: '35vh',
         }}
       >
         <img src="/SocialBox.svg" alt="Social Box" className="w-full h-full" />
+
+        {/* SVG Buttons */}
+        <a href="https://github.com/SouCode" target="_blank" rel="noopener noreferrer">
+          <img src="/githubLogo.svg" alt="GitHub" className="absolute w-1/4 h-1/4" style={{ top: '55%', left: '20%', transform: 'translate(-50%, -50%)' }} />
+        </a>
+        <a href="https://www.linkedin.com/in/john-s-3bb74816b" target="_blank" rel="noopener noreferrer">
+          <img src="/linkedinLogo.svg" alt="LinkedIn" className="absolute w-1/4 h-1/4" style={{ top: '54%', left: '52%', transform: 'translate(-50%, -50%)' }} />
+        </a>
+        <a href="https://www.codewars.com/users/SouCode" target="_blank" rel="noopener noreferrer">
+          <img src="/codewarsLogo.svg" alt="CodeWars" className="absolute w-1/3 h-1/3" style={{ top: '58%', right: '15%', transform: 'translate(50%, -50%)' }} />
+        </a>
       </div>
 
       <div className="mt-10 absolute" style={{ top: '190%', left: '0' }}>
