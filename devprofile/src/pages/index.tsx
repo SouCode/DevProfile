@@ -3,15 +3,13 @@ import HomeHeader from '~/components/HomeHeader';
 import NavBar from '~/components/NavBar';
 import About from '../components/About';
 import Work from '~/components/Work';
-import Contact from '~/components/contact';
-// ... other imports
 
 const Home: React.FC = () => {
   return (
     <>
     <div>
       <NavBar />
-      <HomeBackground />
+      <HomeBackground />  
       <HomeHeader offsetTop="200px" offsetRight="800px" />
     </div>
     <div id="about">
@@ -19,9 +17,6 @@ const Home: React.FC = () => {
     </div>
     <div>
       <Work />
-    </div>
-    <div>
-      <Contact />
     </div>
     </>
   );

@@ -25,14 +25,29 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ offsetTop = '0px', offsetLeft =
       <p className="mt-4" style={{ width: '437.48px', height: '99.84px' }}>
         I enjoy coding as it lets me channel my creativity, while also presenting a challenge of crafting something both inspiring and valuable for others.
       </p>
-      <div className="mt-10">
-        <button 
+      {/* SocialBox SVG */}
+      <div
+        className="absolute"
+        style={{
+          top: '145.5%',  // Adjust for vertical positioning
+          left: '33%', // Adjust for horizontal positioning
+          transform: 'translate(-50%, -50%)',
+          width: '25vw',  // Responsive width based on viewport
+          height: '35vh', // Responsive height based on viewport
+        }}
+      >
+        <img src="/SocialBox.svg" alt="Social Box" className="w-full h-full" />
+      </div>
+
+      <div className="mt-10 absolute" style={{ top: '190%', left: '0' }}>
+        <button
           onClick={() => scrollToSection("#about")}
           style={{ background: 'none', border: 'none', padding: '0', cursor: 'pointer' }}
         >
           <img src="/HeaderAnchor.svg" alt="Anchor Button" style={{ width: '61px', height: '61px' }} />
         </button>
       </div>
+
     </div>
   );
 }

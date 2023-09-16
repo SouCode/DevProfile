@@ -20,9 +20,6 @@ const NavBar: React.FC = () => {
         <button onClick={() => navigateTo("#Work")} className="text-gray-700 hover:text-black">
           Work
         </button>
-        <button onClick={() => navigateTo("#Contact")} className="text-gray-700 hover:text-black">
-          Contact
-        </button>
       </div>
       <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
         ☰
@@ -34,9 +31,6 @@ const NavBar: React.FC = () => {
           </button>
           <button onClick={() => navigateTo("#Work")} className="block w-full text-left px-4 py-2 text-gray-700 hover:text-black">
             Work
-          </button>
-          <button onClick={() => navigateTo("#Contact")} className="block w-full text-left px-4 py-2 text-gray-700 hover:text-black">
-            Contact
           </button>
         </div>
       )}
