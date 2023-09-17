@@ -12,22 +12,21 @@ const About: React.FC = () => {
   const router = useRouter();
   const [contributions, setContributions] = useState<YearData | null>(null);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`/api/contributions?user=SouCode`);
-      const data = await response.json();
-      console.log(data);  // Log the data to inspect its structure
-      setContributions(data);
-    } catch (error) {
-      console.error("Error fetching contribution data:", error);
-    }
-  };
-  
   useEffect(() => {
-    fetchData().catch(err => console.error("Error in fetchData:", err));
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/contributions?user=SouCode`);
+        const data = await response.json();
+        console.log(data);  // Log the data to inspect its structure
+        setContributions(data);
+      } catch (error) {
+        console.error("Error fetching contribution data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
-  
-  
+
 
   const scrollToSection = (sectionId: string) => {
     const section = document.querySelector(sectionId);
@@ -87,26 +86,23 @@ const About: React.FC = () => {
 
       {/* GitHub Contribution Graph */}
       <div className="absolute" style={{ top: '44%', left: '43%', width: '592.528px', height: '190.267px' }}>
-        {contributions && contributions.years ? (
-          contributions.years.map(({ year, contributions: yearContributions }) => (
-            <div key={year}>
-              <h3>{year}</h3>
-              <ul>
-                {yearContributions && yearContributions.map((contribution) => (
-                  <li key={contribution.date}>
-                    {contribution.date}: {contribution.count} contributions
+        {contributions && contributions.data && contributions.data.user && contributions.data.user.contributionsCollection ? (
+          <>
+            <h3>Total Contributions: {contributions.data.user.contributionsCollection.contributionCalendar.totalContributions}</h3>
+            {contributions.data.user.contributionsCollection.contributionCalendar.weeks.map((week, index) => (
+              <div key={index}>
+                {week.contributionDays.map((day) => (
+                  <li key={day.date}>
+                    {day.date}: {day.contributionCount} contributions
                   </li>
                 ))}
-              </ul>
-            </div>
-          ))
+              </div>
+            ))}
+          </>
         ) : (
           <p>Loading GitHub contributions...</p>
         )}
       </div>
-
-
-
 
     </div>
   );
