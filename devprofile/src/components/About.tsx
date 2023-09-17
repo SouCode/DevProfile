@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import router from 'next/router';
+import React from 'react';
+import { useRouter } from 'next/router';  // Import useRouter
 
-interface AboutProps {
-  calendarTop?: string;
-  calendarLeft?: string;
-}
-
-const About: React.FC<AboutProps> = ({ calendarTop = '0px', calendarLeft = '0px' }) => {
+const About: React.FC = () => {
   const router = useRouter();
 
   const scrollToSection = (sectionId: string) => {
@@ -15,13 +11,6 @@ const About: React.FC<AboutProps> = ({ calendarTop = '0px', calendarLeft = '0px'
       section.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  useEffect(() => {
-    // Dynamically import the GitHub calendar library
-    import('github-calendar').then(() => {
-      GitHubCalendar(".calendar", "SouCode", { responsive: true });
-    });
-  }, []);
 
   return (
     <div className="h-screen bg-white relative border-r-8 border-black">
@@ -48,9 +37,11 @@ const About: React.FC<AboutProps> = ({ calendarTop = '0px', calendarLeft = '0px'
           Lets connect and collaborate to shape a more convenient future through technology.</p>
       </div>
 
+
       <div className="absolute flex items-center justify-center p-1 rounded-lg" style={{ top: '40vh', left: '3%', width: '90%', height: '40%' }}>
         <img src="/tools.svg" alt="Tools" className="w-half h-full rounded-lg" />
       </div>
+
 
       <div className="absolute flex items-center justify-center p-1 rounded-lg" style={{ top: '78vh', left: '1vw', width: '44vw', height: '20vh' }}>
         <img src="/Certification.svg" alt="Certifications" className="w-full h-full" />
@@ -72,18 +63,8 @@ const About: React.FC<AboutProps> = ({ calendarTop = '0px', calendarLeft = '0px'
         <img src="/ToBeContinued.svg" alt="To Be Continued" className="w-full h-full" />
       </div>
 
-      {/* GitHub Calendar */}
-      <div 
-        className="calendar absolute" 
-        style={{ 
-          width: '592.528px', 
-          height: '190.267px', 
-          top: '44%',  // Adjust this value as needed
-          left: '43%'  // Adjust this value as needed
-        }}
-      >
-        Loading the data just for you.
-      </div>
+
+
     </div>
   );
 }
