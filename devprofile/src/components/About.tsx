@@ -12,20 +12,22 @@ const About: React.FC = () => {
   const router = useRouter();
   const [contributions, setContributions] = useState<YearData | null>(null);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`/api/contributions?user=SouCode`);
+      const data = await response.json();
+      console.log(data);  // Log the data to inspect its structure
+      setContributions(data);
+    } catch (error) {
+      console.error("Error fetching contribution data:", error);
+    }
+  };
+  
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`/api/contributions`);
-        const data = await response.json();
-        setContributions(data);
-      } catch (error) {
-        console.error("Error fetching contribution data:", error);
-      }
-    };
-
-
-    fetchData();
+    fetchData().catch(err => console.error("Error in fetchData:", err));
   }, []);
+  
+  
 
   const scrollToSection = (sectionId: string) => {
     const section = document.querySelector(sectionId);
