@@ -2,8 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import fetch from 'node-fetch';
-
 const API_URL = 'https://github-contributions-api.now.sh/v1/';
 
 interface ContributionData {
