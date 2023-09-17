@@ -31,10 +31,10 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ offsetTop = '0px', offsetLeft =
         className="absolute flex justify-center items-center"
         style={{
           top: '145.5%',
-          left: '33%',
+          left: '26%',
           transform: 'translate(-50%, -50%)',
-          width: '25vw',
-          height: '35vh',
+          width: '20vw',
+          height: '30vh',
         }}
       >
         <img src="/SocialBox.svg" alt="Social Box" className="w-full h-full" />
