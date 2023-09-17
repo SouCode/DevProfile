@@ -15,13 +15,14 @@ const About: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/contributions');
-        const data: YearData = await response.json();
-        setContributionData(data);
+        const response = await fetch(`/api/contributions`);
+        const data = await response.json();
+        setContributions(data);
       } catch (error) {
-        console.error('Error fetching contribution data:', error);
+        console.error("Error fetching contribution data:", error);
       }
     };
+
 
     fetchData();
   }, []);
@@ -84,12 +85,12 @@ const About: React.FC = () => {
 
       {/* GitHub Contribution Graph */}
       <div className="absolute" style={{ top: '44%', left: '43%', width: '592.528px', height: '190.267px' }}>
-        {contributions ? (
-          Object.entries(contributions).map(([year, contributionData]) => (
+        {contributions && contributions.years ? (
+          contributions.years.map(({ year, contributions: yearContributions }) => (
             <div key={year}>
               <h3>{year}</h3>
               <ul>
-                {contributionData.map((contribution) => (
+                {yearContributions && yearContributions.map((contribution) => (
                   <li key={contribution.date}>
                     {contribution.date}: {contribution.count} contributions
                   </li>
@@ -101,6 +102,9 @@ const About: React.FC = () => {
           <p>Loading GitHub contributions...</p>
         )}
       </div>
+
+
+
 
     </div>
   );
