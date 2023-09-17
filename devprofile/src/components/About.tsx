@@ -10,7 +10,7 @@ type YearData = Record<string, ContributionData[]>;
 
 const About: React.FC = () => {
   const router = useRouter();
-  const [contributionData, setContributionData] = useState<YearData | null>(null);
+  const [contributions, setContributions] = useState<YearData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,35 +84,24 @@ const About: React.FC = () => {
 
       {/* GitHub Contribution Graph */}
       <div className="absolute" style={{ top: '44%', left: '43%', width: '592.528px', height: '190.267px' }}>
-        {contributionData ? (
-          <div>
-            {/* Render your contribution data here */}
-            {/* For demonstration purposes, I'm just showing the dates and counts */}
-            {Object.entries(contributionData).map(([year, contributions]) => {
-              if (!Array.isArray(contributions)) {
-                console.error(`Expected contributions for year ${year} to be an array, but got:`, contributions);
-                return null;
-              }
-
-              return (
-                <div key={year}>
-                  <h3>{year}</h3>
-                  <ul>
-                    {contributions.map((contribution) => (
-                      <li key={contribution.date}>
-                        {contribution.date}: {contribution.count} contributions
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-
-          </div>
+        {contributions ? (
+          Object.entries(contributions).map(([year, contributionData]) => (
+            <div key={year}>
+              <h3>{year}</h3>
+              <ul>
+                {contributionData.map((contribution) => (
+                  <li key={contribution.date}>
+                    {contribution.date}: {contribution.count} contributions
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
         ) : (
           <p>Loading GitHub contributions...</p>
         )}
       </div>
+
     </div>
   );
 }
