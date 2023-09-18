@@ -72,30 +72,33 @@ const About: React.FC = () => {
       </div>
 
       <div className="absolute flex items-center justify-center p-1 rounded-lg" style={{ top: '40vh', left: '3%', width: '90%', height: '40%' }}>
-        <img src="/tools.svg" alt="Tools" className="w-half h-full rounded-lg" />
 
-        {/* GitHub Contribution Chart */}
-        <svg width="728" height="80" className={styles.contributionChart}>
-          {contributions && contributions.data && contributions.data.user && contributions.data.user.contributionsCollection ? (
-            contributions.data.user.contributionsCollection.contributionCalendar.weeks.map((week, weekIndex) => (
-              week.contributionDays.map((day, dayIndex) => (
-                <rect
-                  key={`${weekIndex}-${dayIndex}`}
-                  x={weekIndex * 14} // 14 is the width of each rectangle including the gap
-                  y={dayIndex * 14}
-                  width="12" // width of the rectangle
-                  height="12"
-                  fill={getContributionLevel(day.contributionCount)}
-                  className={styles.contributionDay}
-                >
-                  <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
-                </rect>
-              ))
-            ))
-          ) : null}
-        </svg>
-
+        <img src="/Tools.svg" alt="Tools" className="w-half h-full rounded-lg" />
       </div>
+
+      <div className="absolute" style={{ top: '54vh', left: '38%', width: '40%', height: '50%', zIndex: 10, position: 'relative' }}>
+    {/* GitHub Contribution Chart */}
+    <svg width="870" height="125" className={styles.contributionChart}>
+        {contributions && contributions.data && contributions.data.user && contributions.data.user.contributionsCollection ? (
+            contributions.data.user.contributionsCollection.contributionCalendar.weeks.map((week, weekIndex) => (
+                week.contributionDays.map((day, dayIndex) => (
+                    <rect
+                        key={`${weekIndex}-${dayIndex}`}
+                        x={weekIndex * 16} // Increased from 14
+                        y={dayIndex * 16}  // Increased from 14
+                        width="15"         // Increased from 12
+                        height="15"        // Increased from 12
+                        fill={getContributionLevel(day.contributionCount)}
+                        className={styles.contributionDay}
+                    >
+                        <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
+                    </rect>
+                ))
+            ))
+        ) : null}
+    </svg>
+</div>
+
 
 
 

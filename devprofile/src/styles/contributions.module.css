@@ -3,11 +3,14 @@
 .contributionChart {
   display: grid;
   grid-template-columns: repeat(53, 1fr); /* 53 weeks in a year */
-  gap: 2px; /* Gap between each rectangle */
+  gap: 4px; /* Increased from 2px */
   border: 1px solid black;
   padding: 5px;
   background-color: #ebedf0; /* Background color similar to GitHub's calendar */
+  z-index: 100;
+  position: relative;
 }
+
 
 .contributionDay {
   width: 12px;
