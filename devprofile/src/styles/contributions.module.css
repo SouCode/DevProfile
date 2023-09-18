@@ -1,0 +1,37 @@
+/* contributions.module.css */
+
+.contributionChart {
+  display: grid;
+  grid-template-columns: repeat(53, 1fr); /* 53 weeks in a year */
+  gap: 2px; /* Gap between each rectangle */
+  border: 1px solid black;
+  padding: 5px;
+  background-color: #ebedf0; /* Background color similar to GitHub's calendar */
+}
+
+.contributionDay {
+  width: 12px;
+  height: 12px;
+  rx: 2px; /* Rounded corners */
+  ry: 2px;
+}
+
+.level0 {
+  fill: #ebedf0; /* No contributions */
+}
+
+.level1 {
+  fill: #c6e48b; /* Low contributions */
+}
+
+.level2 {
+  fill: #7bc96f; /* Moderate contributions */
+}
+
+.level3 {
+  fill: #239a3b; /* High contributions */
+}
+
+.level4 {
+  fill: #196127; /* Very high contributions */
+}

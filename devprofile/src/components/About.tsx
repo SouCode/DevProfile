@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import '../styles/contributions.css';
+import styles from 'src/styles/contributions.module.css';
+
+// Define the getContributionLevel function here
+const getContributionLevel = (count: number) => {
+  if (count === 0) return styles.level0;
+  if (count <= 5) return styles.level1;
+  if (count <= 10) return styles.level2;
+  if (count <= 20) return styles.level3;
+  return styles.level4;
+};
 
 
 interface ContributionData {
@@ -64,7 +73,32 @@ const About: React.FC = () => {
 
       <div className="absolute flex items-center justify-center p-1 rounded-lg" style={{ top: '40vh', left: '3%', width: '90%', height: '40%' }}>
         <img src="/tools.svg" alt="Tools" className="w-half h-full rounded-lg" />
+
+        {/* GitHub Contribution Chart */}
+        <svg width="728" height="80" className={styles.contributionChart}>
+          {contributions && contributions.data && contributions.data.user && contributions.data.user.contributionsCollection ? (
+            contributions.data.user.contributionsCollection.contributionCalendar.weeks.map((week, weekIndex) => (
+              week.contributionDays.map((day, dayIndex) => (
+                <rect
+                  key={`${weekIndex}-${dayIndex}`}
+                  x={weekIndex * 14} // 14 is the width of each rectangle including the gap
+                  y={dayIndex * 14}
+                  width="12" // width of the rectangle
+                  height="12"
+                  fill={getContributionLevel(day.contributionCount)}
+                  className={styles.contributionDay}
+                >
+                  <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
+                </rect>
+              ))
+            ))
+          ) : null}
+        </svg>
+
       </div>
+
+
+
 
       <div className="absolute flex items-center justify-center p-1 rounded-lg" style={{ top: '78vh', left: '1vw', width: '44vw', height: '20vh' }}>
         <img src="/Certification.svg" alt="Certifications" className="w-full h-full" />
@@ -86,25 +120,6 @@ const About: React.FC = () => {
         <img src="/ToBeContinued.svg" alt="To Be Continued" className="w-full h-full" />
       </div>
 
-      {/* GitHub Contribution Graph */}
-      <div className="absolute" style={{ top: '44%', left: '43%', width: '592.528px', height: '190.267px' }}>
-        {contributions && contributions.data && contributions.data.user && contributions.data.user.contributionsCollection ? (
-          <>
-            <h3>Total Contributions: {contributions.data.user.contributionsCollection.contributionCalendar.totalContributions}</h3>
-            {contributions.data.user.contributionsCollection.contributionCalendar.weeks.map((week, index) => (
-              <div key={index}>
-                {week.contributionDays.map((day) => (
-                  <li key={day.date}>
-                    {day.date}: {day.contributionCount} contributions
-                  </li>
-                ))}
-              </div>
-            ))}
-          </>
-        ) : (
-          <p>Loading GitHub contributions...</p>
-        )}
-      </div>
 
     </div>
   );
