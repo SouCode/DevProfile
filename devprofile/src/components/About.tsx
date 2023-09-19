@@ -71,33 +71,34 @@ const About: React.FC = () => {
           Lets connect and collaborate to shape a more convenient future through technology.</p>
       </div>
 
-      <div className="absolute flex items-center justify-center p-1 rounded-lg" style={{ top: '40vh', left: '3%', width: '90%', height: '40%' }}>
-
+      <div className="absolute flex items-center justify-center p-1 rounded-lg" style={{ top: '40vh', left: '3%', width: '90%', height: '40%', zIndex: 1 }}>
         <img src="/Tools.svg" alt="Tools" className="w-half h-full rounded-lg" />
+
+        {/* GitHub Contribution Chart */}
+        <div className="absolute" style={{ top: '13vh', left: '65%', transform: 'translateX(-50%)', width: '40vw', height: '15vh', zIndex: 2 }}>
+          <svg width="120%" height="100%" className={styles.contributionChart}>
+            {contributions && contributions.data && contributions.data.user && contributions.data.user.contributionsCollection ? (
+              contributions.data.user.contributionsCollection.contributionCalendar.weeks.map((week, weekIndex) => (
+                week.contributionDays.map((day, dayIndex) => (
+                  <rect
+                    key={`${weekIndex}-${dayIndex}`}
+                    x={(weekIndex * 18 / 720) * 100 + '%'}
+                    y={(dayIndex * 16 / 110) * 100 + '%'}
+                    width={(16 / 710) * 100 + '%'}
+                    height={(16 / 110) * 100 + '%'}
+                    fill={getContributionLevel(day.contributionCount)}
+                    className={styles.contributionDay}
+                  >
+                    <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
+                  </rect>
+                ))
+              ))
+            ) : null}
+          </svg>
+        </div>
       </div>
 
-      <div className="absolute" style={{ top: '54vh', left: '38%', width: '40%', height: '50%', zIndex: 10, position: 'relative' }}>
-    {/* GitHub Contribution Chart */}
-    <svg width="870" height="125" className={styles.contributionChart}>
-        {contributions && contributions.data && contributions.data.user && contributions.data.user.contributionsCollection ? (
-            contributions.data.user.contributionsCollection.contributionCalendar.weeks.map((week, weekIndex) => (
-                week.contributionDays.map((day, dayIndex) => (
-                    <rect
-                        key={`${weekIndex}-${dayIndex}`}
-                        x={weekIndex * 16} // Increased from 14
-                        y={dayIndex * 16}  // Increased from 14
-                        width="15"         // Increased from 12
-                        height="15"        // Increased from 12
-                        fill={getContributionLevel(day.contributionCount)}
-                        className={styles.contributionDay}
-                    >
-                        <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
-                    </rect>
-                ))
-            ))
-        ) : null}
-    </svg>
-</div>
+
 
 
 
