@@ -6,7 +6,7 @@
   gap: 4px; /* Increased from 2px */
   border: 1px solid black;
   padding: 5px;
-  background-color: #ebedf0; /* Background color similar to GitHub's calendar */
+  background-color: #252424; /* Background color similar to GitHub's calendar */
   z-index: 100;
   position: relative;
 }
@@ -37,4 +37,25 @@
 
 .level4 {
   fill: #196127; /* Very high contributions */
+}
+
+/* Style the scrollbar */
+div.overflow-x-auto::-webkit-scrollbar {
+    height: 8px;
+    border-radius: 4px; /* Add this to make the scrollbar background rounded */
+    background-color: #252424; /* Set the scrollbar background color */
+}
+
+div.overflow-x-auto::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 4px;
+}
+
+div.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+div.overflow-x-auto::-webkit-scrollbar-track {
+    background-color: #e11515;
+    border-radius: 4px;
 }
