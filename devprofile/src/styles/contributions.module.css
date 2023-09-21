@@ -39,23 +39,27 @@
   fill: #196127; /* Very high contributions */
 }
 
+/* contributions.module.css */
+
+/* ... (rest of your styles) ... */
+
 /* Style the scrollbar */
 div.overflow-x-auto::-webkit-scrollbar {
-    height: 8px;
-    border-radius: 4px; /* Add this to make the scrollbar background rounded */
-    background-color: #252424; /* Set the scrollbar background color */
+  height: 8px;
+  border-radius: 4px;
 }
 
 div.overflow-x-auto::-webkit-scrollbar-thumb {
-    background-color: #000000;
-    border-radius: 4px;
+  background-color: #000000;
+  border-radius: 4px;
 }
 
 div.overflow-x-auto::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
+  background-color: #555;
 }
 
 div.overflow-x-auto::-webkit-scrollbar-track {
-    background-color: #e11515;
-    border-radius: 4px;
+  background-color: #252424; /* This is the color of the scrollbar holder (track) */
+  border-radius: 4px;
 }
+
