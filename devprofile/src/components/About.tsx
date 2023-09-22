@@ -4,7 +4,7 @@ import styles from 'src/styles/contributions.module.css';
 
 
 const getContributionLevel = (count: number) => {
-  if (count === 0) return 'fill-current text-[#161B22]'; // #161B22
+  if (count === 0) return 'fill-current text-[#2b2b2a]'; // #161B22
   if (count === 1) return 'fill-current text-[#0e4429]'; // #0e4429
   if (count <= 3) return 'fill-current text-[#006d32]'; // #006d32
   if (count <= 5) return 'fill-current text-[#26a641]'; // #26a641
@@ -121,8 +121,8 @@ const About: React.FC = () => {
                       width="17px"
                       height={(16 / 110) * 100 + '%'}
                       className={getContributionLevel(day.contributionCount)}
-                      stroke="#D1D5DB"
-                      strokeWidth="0.5"
+                      stroke="#0d0f0b"
+                      strokeWidth="0.8"
                       rx="2"  // This gives the rectangle rounded corners on the x-axis
                       ry="2"  // This gives the rectangle rounded corners on the y-axis
                     >
@@ -135,12 +135,32 @@ const About: React.FC = () => {
             ) : null}
           </svg>
         </div>
+
+        {/* GitHub Contribution Chart Legend */}
+        <div className="absolute flex items-center space-x-2" style={{ top: '30vh', left: '87%', transform: 'translateX(-40%)' }}>
+          <span className="text-white">Less</span>
+          {[0, 1, 3, 5, 8].map((count, index) => (
+            <svg key={index} width="10" height="10" className="d-inline-block">
+              <rect
+                width="10"
+                height="10"
+                className={getContributionLevel(count)}
+                rx="2"
+                ry="2"
+              ></rect>
+            </svg>
+          ))}
+          <span className="text-white">More</span>
+        </div>
+
+        {/* Days (Monday, Wednesday, Friday) */}
+        <div style={{ position: 'absolute', zIndex: 4 }}>
+          <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '-6vh', left: '-8.5vw', color: 'white' }}>Mon</span>
+          <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '-1vh', left: '-8.5vw', color: 'white' }}>Wed</span>
+          <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '4vh', left: '-8.3vw', color: 'white' }}>Fri</span>
+        </div>
+
       </div>
-
-
-
-
-
 
 
 
