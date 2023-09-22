@@ -4,7 +4,7 @@ import styles from 'src/styles/contributions.module.css';
 
 
 const getContributionLevel = (count: number) => {
-  if (count === 0) return 'fill-current text-gray-800'; // #252424 is close to Tailwind's gray-800
+  if (count === 0) return 'fill-current text-black'; // #252424 is close to Tailwind's gray-800
   if (count === 1) return 'fill-current text-green-100 '; // Very light green with low opacity
   if (count <= 3) return 'fill-current text-green-200 '; // Slightly more opaque
   if (count <= 5) return 'fill-current text-green-300 '; // Moderate opacity
@@ -24,6 +24,7 @@ const About: React.FC = () => {
   const router = useRouter();
   const renderedDates = new Set<string>();
   const [contributions, setContributions] = useState<YearData | null>(null);
+  const uniqueDays = new Set<string>();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
 
@@ -32,16 +33,28 @@ const About: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(`/api/contributions?user=SouCode`);
-        const data = await response.json();
+        let data = await response.json();
         console.log(data);  // Log the data to inspect its structure
+
+        // Remove duplicates
+        data.data.user.contributionsCollection.contributionCalendar.weeks.forEach(week => {
+          week.contributionDays = week.contributionDays.filter(day => {
+            if (uniqueDays.has(day.date)) {
+              return false;
+            }
+            uniqueDays.add(day.date);
+            return true;
+          });
+        });
+
         setContributions(data);
       } catch (error) {
         console.error("Error fetching contribution data:", error);
       }
     };
-
     fetchData();
   }, []);
+
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -89,7 +102,7 @@ const About: React.FC = () => {
         <div
           ref={scrollContainerRef}
           className="absolute overflow-x-auto" style={{ top: '13vh', left: '65%', transform: 'translateX(-40%)', width: '45vw', height: '16vh', zIndex: 2 }}>
-          <svg width="170%" height="100%" className={styles.contributionChart} style={{ backgroundColor: '#252424' }}>
+          <svg width={`${contributions?.data?.user?.contributionsCollection?.contributionCalendar?.weeks?.length * 20}px`} height="100%" className={styles.contributionChart} style={{ backgroundColor: '#252424' }}>
             {contributions?.data?.user?.contributionsCollection ? (
               contributions.data.user.contributionsCollection.contributionCalendar.weeks.map((week, weekIndex) => (
                 week.contributionDays.map((day, dayIndex) => {
@@ -102,9 +115,9 @@ const About: React.FC = () => {
                   return (
                     <rect
                       key={`${weekIndex}-${dayIndex}`}
-                      x={(weekIndex * 10 / 720) * 100 + '%'}
+                      x={(weekIndex * 18) + 'px'}  // Increased spacing on the X-axis
                       y={(dayIndex * 15 / 110) * 100 + '%'}
-                      width={(16 / 710) * 100 + '%'}
+                      width="17px"
                       height={(16 / 110) * 100 + '%'}
                       className={getContributionLevel(day.contributionCount)}
                       stroke="#D1D5DB"  // This is the color equivalent to border-gray-300 in Tailwind
@@ -118,7 +131,6 @@ const About: React.FC = () => {
             ) : null}
           </svg>
         </div>
-
       </div>
 
 
