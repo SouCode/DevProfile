@@ -3,15 +3,15 @@ import { useRouter } from 'next/router';
 import styles from 'src/styles/contributions.module.css';
 
 
-// Define the getContributionLevel function here
 const getContributionLevel = (count: number) => {
-  if (count === 0) return styles.level0;
-  if (count <= 5) return styles.level1;
-  if (count <= 10) return styles.level2;
-  if (count <= 20) return styles.level3;
-  return styles.level4;
+  if (count === 0) return 'fill-current text-gray-800'; // #252424 is close to Tailwind's gray-800
+  if (count === 1) return 'fill-current text-green-100 '; // Very light green with low opacity
+  if (count <= 3) return 'fill-current text-green-200 '; // Slightly more opaque
+  if (count <= 5) return 'fill-current text-green-300 '; // Moderate opacity
+  if (count <= 8) return 'fill-current text-green-400 '; // Darker green with more opacity
+  if (count <= 10) return 'fill-current text-green-600 '; // Even darker green with near full opacity
+  return 'fill-current text-green-900 opacity-100'; // Very deep green with full opacity
 };
-
 
 interface ContributionData {
   date: string;
@@ -22,8 +22,10 @@ type YearData = Record<string, ContributionData[]>;
 
 const About: React.FC = () => {
   const router = useRouter();
+  const renderedDates = new Set<string>();
   const [contributions, setContributions] = useState<YearData | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
 
 
   useEffect(() => {
@@ -87,26 +89,36 @@ const About: React.FC = () => {
         <div
           ref={scrollContainerRef}
           className="absolute overflow-x-auto" style={{ top: '13vh', left: '65%', transform: 'translateX(-40%)', width: '45vw', height: '16vh', zIndex: 2 }}>
-          <svg width="170%" height="100%" className={styles.contributionChart}>
-            {contributions && contributions.data && contributions.data.user && contributions.data.user.contributionsCollection ? (
+          <svg width="170%" height="100%" className={styles.contributionChart} style={{ backgroundColor: '#252424' }}>
+            {contributions?.data?.user?.contributionsCollection ? (
               contributions.data.user.contributionsCollection.contributionCalendar.weeks.map((week, weekIndex) => (
-                week.contributionDays.map((day, dayIndex) => (
-                  <rect
-                    key={`${weekIndex}-${dayIndex}`}
-                    x={(weekIndex * 10 / 720) * 100 + '%'}
-                    y={(dayIndex * 15 / 110) * 100 + '%'}
-                    width={(16 / 710) * 100 + '%'}
-                    height={(16 / 110) * 100 + '%'}
-                    fill={getContributionLevel(day.contributionCount)}
-                    className={styles.contributionDay}
-                  >
-                    <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
-                  </rect>
-                ))
+                week.contributionDays.map((day, dayIndex) => {
+                  // Check if the date has already been rendered
+                  if (renderedDates.has(day.date)) {
+                    return null; // Skip rendering this day
+                  }
+                  renderedDates.add(day.date); // Add the date to the Set
+
+                  return (
+                    <rect
+                      key={`${weekIndex}-${dayIndex}`}
+                      x={(weekIndex * 10 / 720) * 100 + '%'}
+                      y={(dayIndex * 15 / 110) * 100 + '%'}
+                      width={(16 / 710) * 100 + '%'}
+                      height={(16 / 110) * 100 + '%'}
+                      className={getContributionLevel(day.contributionCount)}
+                      stroke="#D1D5DB"  // This is the color equivalent to border-gray-300 in Tailwind
+                      strokeWidth="0.5"  // This sets a thin border
+                    >
+                      <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
+                    </rect>
+                  );
+                })
               ))
             ) : null}
           </svg>
         </div>
+
       </div>
 
 

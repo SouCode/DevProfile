@@ -19,25 +19,6 @@
   ry: 2px;
 }
 
-.level0 {
-  fill: #ebedf0; /* No contributions */
-}
-
-.level1 {
-  fill: #c6e48b; /* Low contributions */
-}
-
-.level2 {
-  fill: #7bc96f; /* Moderate contributions */
-}
-
-.level3 {
-  fill: #239a3b; /* High contributions */
-}
-
-.level4 {
-  fill: #196127; /* Very high contributions */
-}
 
 /* contributions.module.css */
 
