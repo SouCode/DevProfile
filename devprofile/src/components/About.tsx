@@ -4,14 +4,15 @@ import styles from 'src/styles/contributions.module.css';
 
 
 const getContributionLevel = (count: number) => {
-  if (count === 0) return 'fill-current text-black'; // #252424 is close to Tailwind's gray-800
-  if (count === 1) return 'fill-current text-green-100 '; // Very light green with low opacity
-  if (count <= 3) return 'fill-current text-green-200 '; // Slightly more opaque
-  if (count <= 5) return 'fill-current text-green-300 '; // Moderate opacity
-  if (count <= 8) return 'fill-current text-green-400 '; // Darker green with more opacity
-  if (count <= 10) return 'fill-current text-green-600 '; // Even darker green with near full opacity
-  return 'fill-current text-green-900 opacity-100'; // Very deep green with full opacity
+  if (count === 0) return 'fill-current text-[#161B22]'; // #161B22
+  if (count === 1) return 'fill-current text-[#0e4429]'; // #0e4429
+  if (count <= 3) return 'fill-current text-[#006d32]'; // #006d32
+  if (count <= 5) return 'fill-current text-[#26a641]'; // #26a641
+  if (count <= 8) return 'fill-current text-[#39d353]'; // #39d353
+  if (count <= 10) return 'fill-current text-[#39d353]'; // Using the darkest color for counts > 8
+  return 'fill-current text-[#39d353]'; // Using the darkest color for counts > 10
 };
+
 
 interface ContributionData {
   date: string;
@@ -115,16 +116,19 @@ const About: React.FC = () => {
                   return (
                     <rect
                       key={`${weekIndex}-${dayIndex}`}
-                      x={(weekIndex * 18) + 'px'}  // Increased spacing on the X-axis
+                      x={(weekIndex * 18) + 'px'}
                       y={(dayIndex * 15 / 110) * 100 + '%'}
                       width="17px"
                       height={(16 / 110) * 100 + '%'}
                       className={getContributionLevel(day.contributionCount)}
-                      stroke="#D1D5DB"  // This is the color equivalent to border-gray-300 in Tailwind
-                      strokeWidth="0.5"  // This sets a thin border
+                      stroke="#D1D5DB"
+                      strokeWidth="0.5"
+                      rx="2"  // This gives the rectangle rounded corners on the x-axis
+                      ry="2"  // This gives the rectangle rounded corners on the y-axis
                     >
                       <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
                     </rect>
+
                   );
                 })
               ))
