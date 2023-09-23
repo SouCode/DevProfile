@@ -6,7 +6,7 @@
   gap: 4px; /* Increased from 2px */
   border: 1px solid black;
   padding: 5px;
-  background-color: #252424; /* Background color similar to GitHub's calendar */
+  background-color: #ffffff; /* Background color similar to GitHub's calendar */
   z-index: 100;
   position: relative;
 }

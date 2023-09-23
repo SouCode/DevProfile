@@ -11,11 +11,11 @@ const Work: React.FC = () => {
     }, []);
 
     const images = [
-        null, 
-        { src: "/Allure.svg", top: '50%', left: '50%', width: '220px', height: '170px' }, 
-        { src: "/Luminae.svg", top: '45%', left: '50%', width: '220px', height: '190px' }, 
-        { src: "/Chirp.svg", top: '46%', left: '50%', width: '220px', height: '200px' }, 
-        null, 
+        null,
+        { src: "/Allure.svg", top: '50%', left: '50%', width: '220px', height: '170px' },
+        { src: "/Luminae.svg", top: '45%', left: '50%', width: '220px', height: '190px' },
+        { src: "/Chirp.svg", top: '46%', left: '50%', width: '220px', height: '200px' },
+        null,
         null
     ];
 
@@ -34,7 +34,7 @@ const Work: React.FC = () => {
                     zIndex: 11
                 }}
             >
-                <p>Latest Projects</p>
+                <p className="text-xl font-mono">Latest Projects</p>
             </div>
 
             {/* Showcase SVG */}
@@ -51,27 +51,27 @@ const Work: React.FC = () => {
                 <div
                     ref={scrollContainerRef}
                     className="absolute z-20 flex overflow-x-auto"
-                    style={{ 
-                        width: '940px', 
-                        height: '250px', 
-                        top: '80%', 
-                        left: '50%', 
-                        transform: 'translate(-50%, -50%)' 
+                    style={{
+                        width: '940px',
+                        height: '250px',
+                        top: '80%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)'
                     }}
                 >
                     {images.map((image, index) => (
-                        <div 
-                            key={index} 
-                            className="flex-none bg-white mr-4 shadow-md rounded relative" 
-                            style={{ 
-                                width: '220px', 
+                        <div
+                            key={index}
+                            className="flex-none bg-white mr-4 shadow-md rounded relative"
+                            style={{
+                                width: '220px',
                                 height: '180px'
                             }}
                         >
                             {image && (
-                                <img 
-                                    src={image.src} 
-                                    alt="" 
+                                <img
+                                    src={image.src}
+                                    alt=""
                                     className="absolute"
                                     style={{
                                         top: image.top,

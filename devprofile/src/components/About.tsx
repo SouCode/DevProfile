@@ -2,17 +2,15 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import styles from 'src/styles/contributions.module.css';
 
-
 const getContributionLevel = (count: number) => {
-  if (count === 0) return 'fill-current text-[#2b2b2a]'; // #161B22
-  if (count === 1) return 'fill-current text-[#0e4429]'; // #0e4429
-  if (count <= 3) return 'fill-current text-[#006d32]'; // #006d32
-  if (count <= 5) return 'fill-current text-[#26a641]'; // #26a641
-  if (count <= 8) return 'fill-current text-[#39d353]'; // #39d353
-  if (count <= 10) return 'fill-current text-[#39d353]'; // Using the darkest color for counts > 8
-  return 'fill-current text-[#39d353]'; // Using the darkest color for counts > 10
+  if (count === 0) return 'fill-current text-[#2b2b2a]';
+  if (count === 1) return 'fill-current text-[#0e4429]';
+  if (count <= 3) return 'fill-current text-[#006d32]';
+  if (count <= 5) return 'fill-current text-[#26a641]';
+  if (count <= 8) return 'fill-current text-[#39d353]';
+  if (count <= 10) return 'fill-current text-[#39d353]';
+  return 'fill-current text-[#39d353]';
 };
-
 
 interface ContributionData {
   date: string;
@@ -21,40 +19,70 @@ interface ContributionData {
 
 type YearData = Record<string, ContributionData[]>;
 
+const ContributionCalendar: React.FC<{ contributions: YearData | null }> = ({ contributions }) => {
+  const renderedDates = new Set<string>();
+  const svgWidth = contributions?.data?.user?.contributionsCollection?.contributionCalendar?.weeks?.length 
+    ? `${contributions.data.user.contributionsCollection.contributionCalendar.weeks.length * 20}px` 
+    : '0px';
+
+  return (
+    <svg width={svgWidth} height="100%" className={styles.contributionChart} style={{ backgroundColor: '#252424' }}>
+      {contributions?.data?.user?.contributionsCollection?.contributionCalendar?.weeks.map((week, weekIndex) => (
+        week.contributionDays.map((day, dayIndex) => {
+          if (renderedDates.has(day.date)) return null;
+          renderedDates.add(day.date);
+          return (
+            <rect
+              key={`${weekIndex}-${dayIndex}`}
+              x={(weekIndex * 18) + 'px'}
+              y={(dayIndex * 15 / 110) * 100 + '%'}
+              width="17px"
+              height={(16 / 110) * 100 + '%'}
+              className={getContributionLevel(day.contributionCount)}
+              stroke="#0d0f0b"
+              strokeWidth="0.8"
+              rx="2"
+              ry="2"
+            >
+              <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
+            </rect>
+          );
+        })
+      ))}
+    </svg>
+  );
+};
+
 const About: React.FC = () => {
   const router = useRouter();
-  const renderedDates = new Set<string>();
   const [contributions, setContributions] = useState<YearData | null>(null);
-  const uniqueDays = new Set<string>();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const uniqueDays = new Set<string>();  // <-- Add this line
 
+  const fetchedRef = useRef(false);
 
-
-  useEffect(() => {
+useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(`/api/contributions?user=SouCode`);
-        let data = await response.json();
-        console.log(data);  // Log the data to inspect its structure
+      if (fetchedRef.current) return;  // If data has already been fetched, return early
 
-        // Remove duplicates
-        data.data.user.contributionsCollection.contributionCalendar.weeks.forEach(week => {
-          week.contributionDays = week.contributionDays.filter(day => {
-            if (uniqueDays.has(day.date)) {
-              return false;
-            }
-            uniqueDays.add(day.date);
-            return true;
-          });
-        });
+      try {
+        const url = `/api/contributions?user=SouCode`;
+        const response = await fetch(url);
+        let data = await response.json();
+        
+        console.log("Fetching from URL:", url);
+        console.log("Response data:", data);
+    
 
         setContributions(data);
+        fetchedRef.current = true;  // Mark data as fetched
       } catch (error) {
         console.error("Error fetching contribution data:", error);
       }
     };
     fetchData();
   }, []);
+
 
 
   useEffect(() => {
@@ -99,44 +127,12 @@ const About: React.FC = () => {
       <div className="absolute flex items-center justify-center p-1 rounded-lg" style={{ top: '40vh', left: '3%', width: '90%', height: '40%', zIndex: 1 }}>
         <img src="/Tools.svg" alt="Tools" className="w-half h-full rounded-lg" />
 
-        {/* GitHub Contribution Chart */}
         <div
           ref={scrollContainerRef}
-          className="absolute overflow-x-auto" style={{ top: '13vh', left: '65%', transform: 'translateX(-40%)', width: '45vw', height: '16vh', zIndex: 2 }}>
-          <svg width={`${contributions?.data?.user?.contributionsCollection?.contributionCalendar?.weeks?.length * 20}px`} height="100%" className={styles.contributionChart} style={{ backgroundColor: '#252424' }}>
-            {contributions?.data?.user?.contributionsCollection ? (
-              contributions.data.user.contributionsCollection.contributionCalendar.weeks.map((week, weekIndex) => (
-                week.contributionDays.map((day, dayIndex) => {
-                  // Check if the date has already been rendered
-                  if (renderedDates.has(day.date)) {
-                    return null; // Skip rendering this day
-                  }
-                  renderedDates.add(day.date); // Add the date to the Set
-
-                  return (
-                    <rect
-                      key={`${weekIndex}-${dayIndex}`}
-                      x={(weekIndex * 18) + 'px'}
-                      y={(dayIndex * 15 / 110) * 100 + '%'}
-                      width="17px"
-                      height={(16 / 110) * 100 + '%'}
-                      className={getContributionLevel(day.contributionCount)}
-                      stroke="#0d0f0b"
-                      strokeWidth="0.8"
-                      rx="2"  // This gives the rectangle rounded corners on the x-axis
-                      ry="2"  // This gives the rectangle rounded corners on the y-axis
-                    >
-                      <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
-                    </rect>
-
-                  );
-                })
-              ))
-            ) : null}
-          </svg>
+          className="absolute overflow-x-auto" style={{ top: '13vh', left: '65%', transform: 'translateX(-40%)', width: '43vw', height: '16vh', zIndex: 3 }}>
+          {contributions ? <ContributionCalendar contributions={contributions} /> : <p>Loading contributions...</p>}
         </div>
 
-        {/* GitHub Contribution Chart Legend */}
         <div className="absolute flex items-center space-x-2" style={{ top: '30vh', left: '87%', transform: 'translateX(-40%)' }}>
           <span className="text-white">Less</span>
           {[0, 1, 3, 5, 8].map((count, index) => (
@@ -153,16 +149,12 @@ const About: React.FC = () => {
           <span className="text-white">More</span>
         </div>
 
-        {/* Days (Monday, Wednesday, Friday) */}
-        <div style={{ position: 'absolute', zIndex: 3 }}>  {/* Decrease the zIndex here */}
+        <div style={{ position: 'absolute', zIndex: 2}}>
           <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '-6vh', left: '-8.5vw', color: 'white' }}>Mon</span>
           <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '-1vh', left: '-8.5vw', color: 'white' }}>Wed</span>
           <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '4vh', left: '-8.3vw', color: 'white' }}>Fri</span>
         </div>
-
       </div>
-
-
 
       <div className="absolute flex items-center justify-center p-1 rounded-lg" style={{ top: '78vh', left: '1vw', width: '44vw', height: '20vh' }}>
         <img src="/Certification.svg" alt="Certifications" className="w-full h-full" />
@@ -183,8 +175,6 @@ const About: React.FC = () => {
       >
         <img src="/ToBeContinued.svg" alt="To Be Continued" className="w-full h-full" />
       </div>
-
-
     </div>
   );
 }
