@@ -6,12 +6,21 @@ const Work: React.FC = () => {
     useEffect(() => {
         const container = scrollContainerRef.current;
         if (container) {
-            container.scrollLeft = (container.scrollWidth - container.clientWidth) / 2;
+            container.scrollLeft = (container.scrollWidth - container.clientWidth) / 5;
         }
     }, []);
 
+    const images = [
+        null, 
+        { src: "/Allure.svg", top: '50%', left: '50%', width: '220px', height: '170px' }, 
+        { src: "/Luminae.svg", top: '45%', left: '50%', width: '220px', height: '190px' }, 
+        { src: "/Chirp.svg", top: '46%', left: '50%', width: '220px', height: '200px' }, 
+        null, 
+        null
+    ];
+
     return (
-        <div className="h-screen bg-black relative flex flex-col items-center pt-5 overflow-x-hidden"> {/* Added overflow-x-hidden here */}
+        <div className="h-screen bg-black relative flex flex-col items-center pt-5 overflow-x-hidden">
 
             {/* Latest Projects */}
             <div
@@ -50,9 +59,29 @@ const Work: React.FC = () => {
                         transform: 'translate(-50%, -50%)' 
                     }}
                 >
-                    {Array(6).fill(null).map((_, index) => (
-                        <div key={index} className="flex-none bg-white mr-4 shadow-md rounded" style={{ width: '220px', height: '180px' }}>
-                            {/* Removed the number */}
+                    {images.map((image, index) => (
+                        <div 
+                            key={index} 
+                            className="flex-none bg-white mr-4 shadow-md rounded relative" 
+                            style={{ 
+                                width: '220px', 
+                                height: '180px'
+                            }}
+                        >
+                            {image && (
+                                <img 
+                                    src={image.src} 
+                                    alt="" 
+                                    className="absolute"
+                                    style={{
+                                        top: image.top,
+                                        left: image.left,
+                                        width: image.width,
+                                        height: image.height,
+                                        transform: 'translate(-50%, -50%)'
+                                    }}
+                                />
+                            )}
                         </div>
                     ))}
                 </div>
@@ -62,4 +91,3 @@ const Work: React.FC = () => {
 }
 
 export default Work;
-

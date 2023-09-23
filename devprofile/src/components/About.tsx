@@ -154,7 +154,7 @@ const About: React.FC = () => {
         </div>
 
         {/* Days (Monday, Wednesday, Friday) */}
-        <div style={{ position: 'absolute', zIndex: 4 }}>
+        <div style={{ position: 'absolute', zIndex: 3 }}>  {/* Decrease the zIndex here */}
           <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '-6vh', left: '-8.5vw', color: 'white' }}>Mon</span>
           <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '-1vh', left: '-8.5vw', color: 'white' }}>Wed</span>
           <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '4vh', left: '-8.3vw', color: 'white' }}>Fri</span>
