@@ -21,8 +21,8 @@ type YearData = Record<string, ContributionData[]>;
 
 const ContributionCalendar: React.FC<{ contributions: YearData | null }> = ({ contributions }) => {
   const renderedDates = new Set<string>();
-  const svgWidth = contributions?.data?.user?.contributionsCollection?.contributionCalendar?.weeks?.length 
-    ? `${contributions.data.user.contributionsCollection.contributionCalendar.weeks.length * 20}px` 
+  const svgWidth = contributions?.data?.user?.contributionsCollection?.contributionCalendar?.weeks?.length
+    ? `${contributions.data.user.contributionsCollection.contributionCalendar.weeks.length * 20}px`
     : '0px';
 
   return (
@@ -61,7 +61,7 @@ const About: React.FC = () => {
 
   const fetchedRef = useRef(false);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       if (fetchedRef.current) return;  // If data has already been fetched, return early
 
@@ -69,10 +69,10 @@ useEffect(() => {
         const url = `/api/contributions?user=SouCode`;
         const response = await fetch(url);
         let data = await response.json();
-        
+
         console.log("Fetching from URL:", url);
         console.log("Response data:", data);
-    
+
 
         setContributions(data);
         fetchedRef.current = true;  // Mark data as fetched
@@ -133,6 +133,26 @@ useEffect(() => {
           {contributions ? <ContributionCalendar contributions={contributions} /> : <p>Loading contributions...</p>}
         </div>
 
+
+        {/* Months (January to December) 
+        <div style={{ position: 'absolute', top: '10vh', left: '57%', transform: 'translateX(-30%)', zIndex: 4 }}>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '0vw', color: 'white' }}>Jan</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '3.5vw', color: 'white' }}>Feb</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '7vw', color: 'white' }}>Mar</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '10.5vw', color: 'white' }}>Apr</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '14vw', color: 'white' }}>May</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '17.5vw', color: 'white' }}>Jun</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '21vw', color: 'white' }}>Jul</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '24.5vw', color: 'white' }}>Aug</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '28vw', color: 'white' }}>Sep</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '31.5vw', color: 'white' }}>Oct</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '35vw', color: 'white' }}>Nov</span>
+          <span aria-hidden="true" className="text-sm" style={{ position: 'absolute', left: '38.5vw', color: 'white' }}>Dec</span>
+        </div>
+        */}
+
+
+
         <div className="absolute flex items-center space-x-2" style={{ top: '30vh', left: '87%', transform: 'translateX(-40%)' }}>
           <span className="text-white">Less</span>
           {[0, 1, 3, 5, 8].map((count, index) => (
@@ -149,7 +169,7 @@ useEffect(() => {
           <span className="text-white">More</span>
         </div>
 
-        <div style={{ position: 'absolute', zIndex: 2}}>
+        <div style={{ position: 'absolute', zIndex: 2 }}>
           <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '-6vh', left: '-8.5vw', color: 'white' }}>Mon</span>
           <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '-1vh', left: '-8.5vw', color: 'white' }}>Wed</span>
           <span aria-hidden="true" style={{ clipPath: 'None', position: 'absolute', top: '4vh', left: '-8.3vw', color: 'white' }}>Fri</span>

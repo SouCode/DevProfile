@@ -3,6 +3,8 @@ import HomeHeader from '~/components/HomeHeader';
 import NavBar from '~/components/NavBar';
 import About from '../components/About';
 import Work from '~/components/Work';
+import Footer from '~/components/Footer';
+
 
 const Home: React.FC = () => {
   return (
@@ -17,6 +19,7 @@ const Home: React.FC = () => {
     </div>
     <div>
       <Work />
+      <Footer />
     </div>
     </>
   );

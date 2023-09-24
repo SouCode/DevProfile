@@ -1,4 +1,7 @@
 import React, { useEffect, useRef } from 'react';
+import Footer from '~/components/Footer';
+
+
 
 const Work: React.FC = () => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -12,12 +15,13 @@ const Work: React.FC = () => {
 
     const images = [
         null,
-        { src: "/Allure.svg", top: '50%', left: '50%', width: '220px', height: '170px' },
-        { src: "/Luminae.svg", top: '45%', left: '50%', width: '220px', height: '190px' },
-        { src: "/Chirp.svg", top: '46%', left: '50%', width: '220px', height: '200px' },
+        { src: "/Allure.svg", top: '50%', left: '50%', width: '220px', height: '170px', link: "https://allure-music-app.vercel.app/" },
+        { src: "/Luminae.svg", top: '45%', left: '50%', width: '220px', height: '190px', link: "https://luminae.tech/" },
+        { src: "/Chirp.svg", top: '46%', left: '50%', width: '220px', height: '200px', link: "https://socialclone-xi.vercel.app/" },
         null,
         null
     ];
+
 
     return (
         <div className="h-screen bg-black relative flex flex-col items-center pt-5 overflow-x-hidden">
@@ -69,21 +73,24 @@ const Work: React.FC = () => {
                             }}
                         >
                             {image && (
-                                <img
-                                    src={image.src}
-                                    alt=""
-                                    className="absolute"
-                                    style={{
-                                        top: image.top,
-                                        left: image.left,
-                                        width: image.width,
-                                        height: image.height,
-                                        transform: 'translate(-50%, -50%)'
-                                    }}
-                                />
+                                <a href={image.link} target="_blank" rel="noopener noreferrer">
+                                    <img
+                                        src={image.src}
+                                        alt=""
+                                        className="absolute"
+                                        style={{
+                                            top: image.top,
+                                            left: image.left,
+                                            width: image.width,
+                                            height: image.height,
+                                            transform: 'translate(-50%, -50%)'
+                                        }}
+                                    />
+                                </a>
                             )}
                         </div>
                     ))}
+
                 </div>
             </div>
         </div>
