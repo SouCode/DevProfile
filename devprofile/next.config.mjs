@@ -18,9 +18,6 @@ const config = {
     defaultLocale: "en",
   },
 
-  experimental: {
-    reactRefresh: false,
-  },
 };
 
 export default config;
