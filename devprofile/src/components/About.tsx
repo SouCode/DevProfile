@@ -1,8 +1,16 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import styles from 'src/styles/contributions.module.css';
 
-const getContributionLevel = (count: number) => {
+const getContributionLevel = (count: number): string => {
   if (count === 0) return 'fill-current text-[#2b2b2a]';
   if (count === 1) return 'fill-current text-[#0e4429]';
   if (count <= 3) return 'fill-current text-[#006d32]';
@@ -12,12 +20,34 @@ const getContributionLevel = (count: number) => {
   return 'fill-current text-[#39d353]';
 };
 
-interface ContributionData {
-  date: string;
-  count: number;
+interface ContributionWeek {
+  contributionDays: ContributionData[];
 }
 
-type YearData = Record<string, ContributionData[]>;
+interface ContributionCalendar {
+  weeks: ContributionWeek[];
+}
+
+interface UserData {
+  contributionsCollection: {
+    contributionCalendar: ContributionCalendar;
+  };
+}
+
+interface ContributionResponse {
+  data: {
+    user: UserData;
+  };
+}
+
+interface ContributionData {
+  date: string;
+  contributionCount: number;
+}
+
+
+
+type YearData = ContributionResponse;
 
 const ContributionCalendar: React.FC<{ contributions: YearData | null }> = ({ contributions }) => {
   const renderedDates = new Set<string>();
@@ -28,7 +58,7 @@ const ContributionCalendar: React.FC<{ contributions: YearData | null }> = ({ co
   return (
     <svg width={svgWidth} height="100%" className={styles.contributionChart} style={{ backgroundColor: '#252424' }}>
       {contributions?.data?.user?.contributionsCollection?.contributionCalendar?.weeks.map((week, weekIndex) => (
-        week.contributionDays.map((day, dayIndex) => {
+        week.contributionDays.map((day: ContributionData, dayIndex: number) => {
           if (renderedDates.has(day.date)) return null;
           renderedDates.add(day.date);
           return (
@@ -44,6 +74,7 @@ const ContributionCalendar: React.FC<{ contributions: YearData | null }> = ({ co
               rx="2"
               ry="2"
             >
+
               <title>{`${day.date}: ${day.contributionCount} contributions`}</title>
             </rect>
           );
@@ -57,33 +88,25 @@ const About: React.FC = () => {
   const router = useRouter();
   const [contributions, setContributions] = useState<YearData | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const uniqueDays = new Set<string>();  // <-- Add this line
-
   const fetchedRef = useRef(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (fetchedRef.current) return;  // If data has already been fetched, return early
+      if (fetchedRef.current) return;
 
       try {
         const url = `/api/contributions?user=SouCode`;
         const response = await fetch(url);
-        let data = await response.json();
-
-        console.log("Fetching from URL:", url);
-        console.log("Response data:", data);
-
+        const data = await response.json();
 
         setContributions(data);
-        fetchedRef.current = true;  // Mark data as fetched
+        fetchedRef.current = true;
       } catch (error) {
         console.error("Error fetching contribution data:", error);
       }
     };
-    fetchData();
+    void fetchData();
   }, []);
-
-
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -98,6 +121,7 @@ const About: React.FC = () => {
       section.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
 
   return (
     <div className="h-screen bg-white relative border-r-8 border-black">
